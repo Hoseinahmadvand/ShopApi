@@ -1,6 +1,5 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
-using System;
 
 namespace Shop.Domain.UserAgg
 {

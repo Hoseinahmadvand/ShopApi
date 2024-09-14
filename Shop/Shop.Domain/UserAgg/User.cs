@@ -2,13 +2,12 @@
 using Common.Domain.Exceptions;
 using Shop.Domain.UserAgg.Enums;
 using Shop.Domain.UserAgg.Services;
-using System;
 
 namespace Shop.Domain.UserAgg
 {
     public class User : AggregateRoot
     {
-     
+
 
         public string Name { get; private set; }
         public string Family { get; private set; }
@@ -21,9 +20,9 @@ namespace Shop.Domain.UserAgg
         public List<UserAddress> Addresses { get; private set; }
 
 
-        #region User Event
+        #region User 
 
-      
+
         public User(string name,
                  string family,
                  string phoneNumber,
@@ -45,7 +44,7 @@ namespace Shop.Domain.UserAgg
                   string family,
                   string phoneNumber,
                   string email,
-                  Gender gender ,
+                  Gender gender,
                   IUserDomainService domainService)
         {
             Guard(phoneNumber, email, domainService);
@@ -61,7 +60,7 @@ namespace Shop.Domain.UserAgg
                                         string password,
                                         IUserDomainService domainService)
         {
-            return new User("","",phoneNumber,email,password,Gender.None,domainService);
+            return new User("", "", phoneNumber, email, password, Gender.None, domainService);
         }
 
 
@@ -69,28 +68,28 @@ namespace Shop.Domain.UserAgg
                           string email,
                           IUserDomainService domainService)
         {
-            NullOrEmptyDomainDataException.CheckString(phoneNumber,nameof(phoneNumber));
-            NullOrEmptyDomainDataException.CheckString(email,nameof(email));
+            NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
+            NullOrEmptyDomainDataException.CheckString(email, nameof(email));
 
-            if (phoneNumber.Length!=11)
+            if (phoneNumber.Length != 11)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("شماره موبایل"));
 
-            if (email.IsValidEmail()==false)
+            if (email.IsValidEmail() == false)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("ایمیل"));
 
-            if(phoneNumber!=PhoneNumber)
-                if(domainService.IsPhoneNumberExist(phoneNumber))
+            if (phoneNumber != PhoneNumber)
+                if (domainService.IsPhoneNumberExist(phoneNumber))
                     throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("شماره موبایل"));
 
-            if(email!=Email)
-                if(domainService.IsEmailExist(email))
+            if (email != Email)
+                if (domainService.IsEmailExist(email))
                     throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("ایمیل"));
 
         }
 
         #endregion
 
-        #region Address Event
+        #region Address 
 
 
         public void AddAdderss(UserAddress address)
@@ -119,20 +118,21 @@ namespace Shop.Domain.UserAgg
 
         #endregion
 
-        #region Wallet Event 
+        #region Wallet  
 
         public void ChargeWallet(Wallet wallet)
         {
+            wallet.UserId = Id;
             Wallets.Add(wallet);
         }
 
         #endregion
 
-        #region Roles Event
+        #region Roles 
 
         public void ChangeRoles(List<UserRole> roles)
         {
-            roles.ForEach(r=>r.UserId=Id);
+            roles.ForEach(r => r.UserId = Id);
             Roles.Clear();
             Roles.AddRange(Roles);
         }

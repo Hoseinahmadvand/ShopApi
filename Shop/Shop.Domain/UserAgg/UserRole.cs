@@ -9,7 +9,7 @@ namespace Shop.Domain.UserAgg
             RoleId = roleId;
         }
 
-        public long UserId { get;internal set; }
-        public long RoleId { get;private set; }
+        public long UserId { get; internal set; }
+        public long RoleId { get; private set; }
     }
 }

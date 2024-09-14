@@ -19,7 +19,7 @@ namespace Shop.Domain.UserAgg
             Type = type;
         }
 
-        public long UserId { get;internal set; }
+        public long UserId { get; internal set; }
         public int Price { get; private set; }
         public string Description { get; private set; }
         public bool IsFinally { get; private set; }
@@ -28,14 +28,14 @@ namespace Shop.Domain.UserAgg
 
         public void Finally(string refCode)
         {
-            IsFinally=true;
-            FinallyDate=DateTime.Now;
+            IsFinally = true;
+            FinallyDate = DateTime.Now;
             Description += $"کد پیگیری : {refCode}";
         }
         public void Finally()
         {
-            IsFinally=true;
-            FinallyDate=DateTime.Now;
+            IsFinally = true;
+            FinallyDate = DateTime.Now;
         }
-    } 
+    }
 }

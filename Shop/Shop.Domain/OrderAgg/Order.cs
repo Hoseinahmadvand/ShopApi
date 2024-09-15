@@ -28,7 +28,7 @@ namespace Shop.Domain.OrderAgg
         public OrderStatus Status { get; private set; }
         public OrderDiscount? Discount { get; private set; }
         public OrderAddress? Address { get; private set; }
-        public ShippingMethod? ShippingMethod { get; private set; }
+        public OrderShippingMethod? ShippingMethod { get; private set; }
         public List<OrderItem> Items { get; private set; }
         public DateTime? LastUpdate { get; set; }
         public int TotalPrice

@@ -1,4 +1,8 @@
-﻿namespace Common.Application
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+
+namespace Common.Application
 {
     public static class ImageConvertor
     {

@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\Edit\" />
-    <Folder Include="Categories\Create\" />
-    <Folder Include="Categories\AddChild\" />
     <Folder Include="Categories\Remove\" />
     <Folder Include="Comments\Edit\" />
     <Folder Include="Comments\Create\" />
@@ -40,6 +37,16 @@
     <Folder Include="Users\Register\" />
     <Folder Include="Users\RemoveToken\" />
     <Folder Include="Users\SetActiveAddress\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Domain\Common.Domain.csproj" />
+    <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

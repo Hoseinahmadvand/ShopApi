@@ -13,8 +13,6 @@
     <Folder Include="Products\Create\" />
     <Folder Include="Products\AddImage\" />
     <Folder Include="Products\RemoveImage\" />
-    <Folder Include="Roles\Edit\" />
-    <Folder Include="Roles\Create\" />
     <Folder Include="Sellers\EditInventory\" />
     <Folder Include="Sellers\AddInventory\" />
     <Folder Include="Sellers\Edit\" />

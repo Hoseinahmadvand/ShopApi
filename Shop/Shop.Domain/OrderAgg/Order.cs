@@ -10,7 +10,7 @@ namespace Shop.Domain.OrderAgg
         #region Ctor
 
 
-        public Order()
+        private Order()
         {
 
         }
@@ -51,10 +51,18 @@ namespace Shop.Domain.OrderAgg
 
         public void AddItem(OrderItem item)
         {
+            ChangeOrderGuard();
+            var oldItem = Items.FirstOrDefault(i => i.Id == item.InventoryId);
+            if (oldItem != null)
+            {
+                oldItem.ChangeCount(item.Count + oldItem.Count);
+                return;
+            }
             Items.Add(item);
         }
         public void RemoveItem(long itemId)
         {
+            ChangeOrderGuard();
             var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
             if (currentItem != null)
                 Items.Remove(currentItem);
@@ -62,11 +70,32 @@ namespace Shop.Domain.OrderAgg
 
         public void ChaneCountItem(long itemId, int count)
         {
+            ChangeOrderGuard();
             var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
             if (currentItem == null)
                 throw new NullOrEmptyDomainDataException();
 
             currentItem.ChangeCount(count);
+        }
+        public void IncreaseItemCount(long itemId,int count)
+        {
+            ChangeOrderGuard();
+            var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
+
+            if (currentItem == null)
+                throw new NullOrEmptyDomainDataException();
+
+            currentItem.IncreaseCount(count);
+        }
+        public void DecreaseItemCount(long itemId,int count)
+        {
+            ChangeOrderGuard();
+            var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
+
+            if (currentItem == null)
+                throw new NullOrEmptyDomainDataException();
+
+            currentItem.DecreaseCount(count);
         }
 
         #endregion
@@ -88,9 +117,17 @@ namespace Shop.Domain.OrderAgg
 
         public void Checkout(OrderAddress orderAddress)
         {
+            ChangeOrderGuard();
             Address = orderAddress;
         }
 
         #endregion
+
+        public void ChangeOrderGuard()
+        {
+            if (Status != OrderStatus.Pennding)
+                throw new InvalidDomainDataException("امکان ویرایش این سفارش وجود ندارد .");
+
+        }
     }
 }

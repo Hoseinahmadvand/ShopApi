@@ -4,7 +4,7 @@ using Shop.Domain.RoleAgg.Repository;
 
 namespace Shop.Application.Roles.Create
 {
-    public class CreateRoleCommandHandler : IBaseCommandHandler<CreateRoleCommand>
+    internal class CreateRoleCommandHandler : IBaseCommandHandler<CreateRoleCommand>
     {
         private readonly IRoleRepository _roleRepository;
 

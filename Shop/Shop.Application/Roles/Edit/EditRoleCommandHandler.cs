@@ -4,7 +4,7 @@ using Shop.Domain.RoleAgg.Repository;
 
 namespace Shop.Application.Roles.Edit
 {
-    public class EditRoleCommandHandler : IBaseCommandHandler<EditRoleCommand>
+    internal class EditRoleCommandHandler : IBaseCommandHandler<EditRoleCommand>
     {
         private readonly IRoleRepository _roleRepository;
 

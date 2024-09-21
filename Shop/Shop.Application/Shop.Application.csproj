@@ -11,8 +11,6 @@
     <Folder Include="Comments\Delete\" />
     <Folder Include="Sellers\EditInventory\" />
     <Folder Include="Sellers\AddInventory\" />
-    <Folder Include="Sellers\Edit\" />
-    <Folder Include="Sellers\Create\" />
     <Folder Include="SiteEntities\Banners\" />
     <Folder Include="SiteEntities\Sliders\" />
     <Folder Include="Users\EditAddress\" />

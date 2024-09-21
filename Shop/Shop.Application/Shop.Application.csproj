@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Categories\Remove\" />
     <Folder Include="Comments\Delete\" />
-    <Folder Include="SiteEntities\Banners\" />
-    <Folder Include="SiteEntities\Sliders\" />
     <Folder Include="Users\EditAddress\" />
     <Folder Include="Users\Edit\" />
     <Folder Include="Users\DeleteAddress\" />

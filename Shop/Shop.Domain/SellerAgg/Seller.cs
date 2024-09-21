@@ -75,13 +75,14 @@ namespace Shop.Domain.SellerAgg
         #endregion
 
         #region Guard
-        public void Guard(string shopName, string nationalCode)
+        private void Guard(string shopName, string nationalCode)
         {
             NullOrEmptyDomainDataException.CheckString(shopName, nameof(shopName));
             NullOrEmptyDomainDataException.CheckString(nationalCode, nameof(nationalCode));
             if (IranianNationalIdChecker.IsValid(nationalCode) == false)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("کدملی"));
         }
+
         #endregion
     }
 }

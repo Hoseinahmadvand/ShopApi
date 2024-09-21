@@ -3,7 +3,7 @@ using Shop.Domain.CommentAgg.Repository;
 
 namespace Shop.Application.Comments.ChangeStatus
 {
-    public class ChangeStatusCommandHandler : IBaseCommandHandler<ChangeStatusCommand>
+    internal class ChangeStatusCommandHandler : IBaseCommandHandler<ChangeStatusCommand>
     {
         private readonly ICommentRepository _repository;
 

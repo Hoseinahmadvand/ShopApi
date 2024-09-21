@@ -4,7 +4,7 @@ using Shop.Domain.OrderAgg;
 using Shop.Domain.OrderAgg.Repository;
 using Shop.Domain.SellerAgg.Repository;
 
-public class AddOrderItemCommandHandler : IBaseCommandHandler<AddOrderItemCommand>
+internal class AddOrderItemCommandHandler : IBaseCommandHandler<AddOrderItemCommand>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly ISellerRepository _sellerRepository;

@@ -31,7 +31,7 @@ namespace Shop.Domain.SiteEntities
             ImageName = imageName;
         }
 
-        public void Guard(string title, string link, string imageName)
+        private void Guard(string title, string link, string imageName)
         {
             NullOrEmptyDomainDataException.CheckString(link, nameof(link));
             NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));

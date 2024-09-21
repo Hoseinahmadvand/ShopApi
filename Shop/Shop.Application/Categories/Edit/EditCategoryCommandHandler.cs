@@ -4,7 +4,7 @@ using Shop.Domain.CategoryAgg.Service;
 
 namespace Shop.Application.Categories.Edit
 {
-    public class EditCategoryCommandHandler : IBaseCommandHandler<EditCategoryCommand>
+    internal class EditCategoryCommandHandler : IBaseCommandHandler<EditCategoryCommand>
     {
         private readonly ICategoryRepository _repository;
         private readonly ICategoryDomainService _domainService;

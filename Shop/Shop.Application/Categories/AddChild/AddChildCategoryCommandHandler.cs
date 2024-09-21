@@ -5,7 +5,7 @@ using Shop.Domain.CategoryAgg.Service;
 
 namespace Shop.Application.Categories.AddChild
 {
-    public class AddChildCategoryCommandHandler : IBaseCommandHandler<AddChildCategoryCommand>
+    internal class AddChildCategoryCommandHandler : IBaseCommandHandler<AddChildCategoryCommand>
     {
         private readonly ICategoryRepository _repository;
         private readonly ICategoryDomainService _domainService;

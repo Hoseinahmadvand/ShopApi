@@ -3,11 +3,11 @@ using Shop.Domain.OrderAgg.Repository;
 
 namespace Shop.Application.Orders.RemoveItem
 {
-    public class RemoveItemCommandHamdler : IBaseCommandHandler<RemoveItemCommand>
+    internal class RemoveItemCommandHandler : IBaseCommandHandler<RemoveItemCommand>
     {
         private readonly IOrderRepository _orderRepository;
 
-        public RemoveItemCommandHamdler(IOrderRepository orderRepository)
+        public RemoveItemCommandHandler(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }

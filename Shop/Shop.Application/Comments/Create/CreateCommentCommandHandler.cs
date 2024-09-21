@@ -4,7 +4,7 @@ using Shop.Domain.CommentAgg.Repository;
 
 namespace Shop.Application.Comments.Create
 {
-    public class CreateCommentCommandHandler : IBaseCommandHandler<CreateCommentCommand>
+    internal class CreateCommentCommandHandler : IBaseCommandHandler<CreateCommentCommand>
     {
         private readonly ICommentRepository _repository;
 

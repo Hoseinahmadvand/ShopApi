@@ -1,13 +1,8 @@
-﻿using Common.Domain.Exceptions;
+﻿using Common.Domain;
+using Common.Domain.Exceptions;
 using Common.Domain.Utils;
 using Common.Domain.ValueObjects;
-using Common.Domain;
 using Shop.Domain.ProductAgg.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Domain.ProductAgg
 {
@@ -21,7 +16,7 @@ namespace Shop.Domain.ProductAgg
         public string ImageName { get; private set; }
         public string Description { get; private set; }
         public long CategoryId { get; private set; }
-        public long SubCategoryId { get; private set; }
+        public long? SubCategoryId { get; private set; }
         public long? SecondarySubCategoryId { get; private set; }
         public string Slug { get; private set; }
         public SeoData SeoData { get; private set; }
@@ -32,11 +27,18 @@ namespace Shop.Domain.ProductAgg
         #region Product
 
 
-        public Product(string title, string imageName, string description, long categoryId,
-           long subCategoryId, long? secondarySubCategoryId, IProductDomainService domainService,
-           string slug, SeoData seoData)
+        public Product(string title,
+                       string imageName,
+                       string description,
+                       long categoryId,
+                       long subCategoryId,
+                       long? secondarySubCategoryId,
+                       IProductDomainService domainService,
+                       string slug,
+                       SeoData seoData)
         {
             NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
+
             Guard(title, slug, description, domainService);
 
             Title = title;
@@ -49,9 +51,14 @@ namespace Shop.Domain.ProductAgg
             SeoData = seoData;
         }
 
-        public void Edit(string title, string description, long categoryId,
-            long subCategoryId, long secondarySubCategoryId, string slug, IProductDomainService domainService
-            , SeoData seoData)
+        public void Edit(string title,
+                         string description,
+                         long categoryId,
+                         long? subCategoryId,
+                         long? secondarySubCategoryId,
+                         string slug,
+                         IProductDomainService domainService,
+                         SeoData seoData)
         {
             Guard(title, slug, description, domainService);
             Title = title;
@@ -104,9 +111,11 @@ namespace Shop.Domain.ProductAgg
 
         #region Guard
 
-     
-        private void Guard(string title, string slug, string description,
-            IProductDomainService domainService)
+
+        private void Guard(string title,
+                           string slug,
+                           string description,
+                           IProductDomainService domainService)
         {
             NullOrEmptyDomainDataException.CheckString(title, nameof(title));
             NullOrEmptyDomainDataException.CheckString(description, nameof(description));
@@ -115,7 +124,7 @@ namespace Shop.Domain.ProductAgg
             if (slug != Slug)
                 if (domainService.SlugIsExist(slug.ToSlug()))
                     throw new SlugIsDuplicateException();
-        }  
+        }
 
         #endregion
     }

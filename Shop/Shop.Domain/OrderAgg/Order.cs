@@ -123,7 +123,7 @@ namespace Shop.Domain.OrderAgg
 
         #endregion
 
-        public void ChangeOrderGuard()
+        private void ChangeOrderGuard()
         {
             if (Status != OrderStatus.Pennding)
                 throw new InvalidDomainDataException("امکان ویرایش این سفارش وجود ندارد .");

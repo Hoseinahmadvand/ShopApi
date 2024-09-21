@@ -64,28 +64,7 @@ namespace Shop.Domain.UserAgg
         }
 
 
-        public void Guard(string phoneNumber,
-                          string email,
-                          IUserDomainService domainService)
-        {
-            NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
-            NullOrEmptyDomainDataException.CheckString(email, nameof(email));
 
-            if (phoneNumber.Length != 11)
-                throw new InvalidDomainDataException(CommomMassages.NotValid("شماره موبایل"));
-
-            if (email.IsValidEmail() == false)
-                throw new InvalidDomainDataException(CommomMassages.NotValid("ایمیل"));
-
-            if (phoneNumber != PhoneNumber)
-                if (domainService.IsPhoneNumberExist(phoneNumber))
-                    throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("شماره موبایل"));
-
-            if (email != Email)
-                if (domainService.IsEmailExist(email))
-                    throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("ایمیل"));
-
-        }
 
         #endregion
 
@@ -139,7 +118,31 @@ namespace Shop.Domain.UserAgg
 
         #endregion
 
+        #region Guard
 
 
+        private void Guard(string phoneNumber,
+                  string email,
+                  IUserDomainService domainService)
+        {
+            NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
+            NullOrEmptyDomainDataException.CheckString(email, nameof(email));
+
+            if (phoneNumber.Length != 11)
+                throw new InvalidDomainDataException(CommomMassages.NotValid("شماره موبایل"));
+
+            if (email.IsValidEmail() == false)
+                throw new InvalidDomainDataException(CommomMassages.NotValid("ایمیل"));
+
+            if (phoneNumber != PhoneNumber)
+                if (domainService.IsPhoneNumberExist(phoneNumber))
+                    throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("شماره موبایل"));
+
+            if (email != Email)
+                if (domainService.IsEmailExist(email))
+                    throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("ایمیل"));
+
+        }
+        #endregion
     }
 }

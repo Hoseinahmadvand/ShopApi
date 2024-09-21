@@ -3,7 +3,7 @@ using Shop.Domain.CommentAgg.Repository;
 
 namespace Shop.Application.Comments.Edit
 {
-    public class EditCommentCommandHnadler : IBaseCommandHandler<EditCommentCommand>
+    internal class EditCommentCommandHnadler : IBaseCommandHandler<EditCommentCommand>
     {
         private readonly ICommentRepository _repository;
 

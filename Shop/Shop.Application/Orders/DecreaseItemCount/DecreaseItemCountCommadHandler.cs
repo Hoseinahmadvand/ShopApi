@@ -3,7 +3,7 @@ using Shop.Domain.OrderAgg.Repository;
 
 namespace Shop.Application.Orders.DecreaseItemCount
 {
-    public class DecreaseItemCountCommadHandler : IBaseCommandHandler<DecreaseItemCountCommad>
+    internal class DecreaseItemCountCommadHandler : IBaseCommandHandler<DecreaseItemCountCommad>
     {
         private readonly IOrderRepository _orderRepository;
 

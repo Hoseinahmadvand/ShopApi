@@ -3,7 +3,7 @@ using Shop.Domain.OrderAgg.Repository;
 
 namespace Shop.Application.Orders.IncreaseItemCount
 {
-    public class IncreaseItemCountCommandHandler : IBaseCommandHandler<IncreaseItemCountCommand>
+    internal class IncreaseItemCountCommandHandler : IBaseCommandHandler<IncreaseItemCountCommand>
     {
         private readonly IOrderRepository _orderRepository;
 

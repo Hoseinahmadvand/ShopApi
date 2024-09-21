@@ -50,13 +50,13 @@ namespace Shop.Domain.OrderAgg
 
         #region Guards
 
-        public void PriceGuard(int newPrice)
+        private void PriceGuard(int newPrice)
         {
             if (newPrice < 1)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("مبلغ کالا"));
         }
 
-        public void CountGuard(int count)
+        private void CountGuard(int count)
         {
             if (Count < 1)
                 throw new InvalidDomainDataException();

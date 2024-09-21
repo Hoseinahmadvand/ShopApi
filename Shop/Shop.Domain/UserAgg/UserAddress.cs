@@ -57,7 +57,7 @@ namespace Shop.Domain.UserAgg
             NationalCode = nationalCode;
         }
 
-        public void Guard(string shire,
+        private void Guard(string shire,
                     string city,
                     string postalCode,
                     string postalAddress,

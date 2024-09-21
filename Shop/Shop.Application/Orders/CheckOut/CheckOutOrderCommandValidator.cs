@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace Shop.Application.Orders.CheckOut
 {
-    internal class CheckOrderOutCommandValidator : AbstractValidator<CheckOrderOutCommand>
+    internal class CheckOutOrderCommandValidator : AbstractValidator<CheckOrderOutCommand>
     {
-        public CheckOrderOutCommandValidator()
+        public CheckOutOrderCommandValidator()
         {
             RuleFor(r => r.Name)
                 .NotNull()
@@ -24,11 +24,7 @@ namespace Shop.Application.Orders.CheckOut
              .NotNull()
              .NotEmpty().WithMessage(ValidationMessages.required("شهر"));
 
-            RuleFor(r => r.PhoneNumber)
-             .NotNull()
-             .NotEmpty().WithMessage(ValidationMessages.required("شماره موبایل"))
-             .MaximumLength(11).WithMessage("شماره موبایل نامعتبر است")
-             .MinimumLength(11).WithMessage("شماره موبایل نامعتبر است");
+        
 
             RuleFor(r => r.NationalCode)
              .NotNull()

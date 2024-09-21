@@ -26,7 +26,7 @@ namespace Shop.Application.Products.RemoveImage
 
             await _productRepository.Save();
 
-            _fileService.DeleteFile(Directories.ProductImaesGallery(imageName),imageName);
+            _fileService.DeleteFile(Directories.ProductImagesGallery(imageName),imageName);
 
             return OperationResult.Success();
         }

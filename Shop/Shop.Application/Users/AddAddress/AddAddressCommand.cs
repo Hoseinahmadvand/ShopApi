@@ -1,21 +1,20 @@
-﻿using Common.Domain;
+﻿using Common.Application;
 using Common.Domain.ValueObjects;
 
-namespace Shop.Domain.OrderAgg
+namespace Shop.Application.Users.AddAddress
 {
-    public class OrderAddress:BaseEntity
+    public class AddAddressCommand : IBaseCommand
     {
-        public OrderAddress(long orderId,
-                            string shire,
-                            string city,
-                            string postalCode,
-                            string postalAddress,
-                            PhoneNumber phoneNumber,
-                            string name,
-                            string family,
-                            string nationalCode)
+        public AddAddressCommand(long userId,
+            string shire,
+                                 string city,
+                                 string postalCode,
+                                 string postalAddress,
+                                 PhoneNumber phoneNumber,
+                                 string name,
+                                 string family,
+                                 string nationalCode)
         {
-            OrderId = orderId;
             Shire = shire;
             City = city;
             PostalCode = postalCode;
@@ -24,11 +23,10 @@ namespace Shop.Domain.OrderAgg
             Name = name;
             Family = family;
             NationalCode = nationalCode;
+            UserId = userId;
         }
 
-        public long OrderId { get; internal set; }
-        public Order Order { get; set; }
-
+        public long UserId { get;private set; }
         public string Shire { get; private set; }
         public string City { get; private set; }
         public string PostalCode { get; private set; }
@@ -38,7 +36,5 @@ namespace Shop.Domain.OrderAgg
         public string Name { get; private set; }
         public string Family { get; private set; }
         public string NationalCode { get; private set; }
-       
     }
-
 }

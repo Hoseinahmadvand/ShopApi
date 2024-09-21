@@ -1,5 +1,6 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
+using Common.Domain.ValueObjects;
 using Shop.Domain.UserAgg.Enums;
 using Shop.Domain.UserAgg.Services;
 
@@ -11,7 +12,8 @@ namespace Shop.Domain.UserAgg
 
         public string Name { get; private set; }
         public string Family { get; private set; }
-        public string PhoneNumber { get; private set; }
+        public string Avatar { get; private set; }
+        public PhoneNumber PhoneNumber { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
         public Gender Gender { get; private set; }
@@ -25,29 +27,31 @@ namespace Shop.Domain.UserAgg
 
         public User(string name,
                  string family,
-                 string phoneNumber,
+                 PhoneNumber phoneNumber,
                  string email,
                  string password,
                  Gender gender,
-                 IUserDomainService domainService)
+                 IUserDomainService domainService
+                )
         {
-            Guard(phoneNumber, email, domainService);
+            Guard( email, domainService);
             Name = name;
             Family = family;
             PhoneNumber = phoneNumber;
             Email = email;
             Password = password;
             Gender = gender;
+            Avatar = "avatar.png";
         }
 
         public void Edit(string name,
                   string family,
-                  string phoneNumber,
+                  PhoneNumber phoneNumber,
                   string email,
                   Gender gender,
                   IUserDomainService domainService)
         {
-            Guard(phoneNumber, email, domainService);
+            Guard( email, domainService);
             Name = name;
             Family = family;
             PhoneNumber = phoneNumber;
@@ -56,7 +60,7 @@ namespace Shop.Domain.UserAgg
         }
 
         public static User RegisterUser(string email,
-                                        string phoneNumber,
+                                        PhoneNumber phoneNumber,
                                         string password,
                                         IUserDomainService domainService)
         {
@@ -64,7 +68,12 @@ namespace Shop.Domain.UserAgg
         }
 
 
-
+        public void SetAvatar(string avatarName)
+        {
+            if (string.IsNullOrWhiteSpace(avatarName))
+                avatarName = "avatar.png";
+            Avatar = avatarName;
+        }
 
         #endregion
 
@@ -76,14 +85,21 @@ namespace Shop.Domain.UserAgg
             address.UserId = Id;
             Addresses.Add(address);
         }
-        public void EditAdderss(UserAddress address)
+        public void EditAdderss(UserAddress address,long id)
         {
-            var oldAdderss = Addresses.FirstOrDefault(a => a.Id == address.Id);
-            if (oldAdderss == null)
-                throw new NullOrEmptyDomainDataException(CommomMassages.RecordNotFound("آدرس"));
+            var oldAddress = Addresses.FirstOrDefault(f => f.Id == id);
+            if (oldAddress == null)
+                throw new NullOrEmptyDomainDataException("Address Not found");
 
-            Addresses.Remove(oldAdderss);
-            Addresses.Add(address);
+
+            oldAddress.EditAddress(address.Shire,
+                                   address.City,
+                                   address.PostalCode,
+                                   address.PostalAddress,
+                                   address.PhoneNumber,
+                                   address.Name,
+                                   address.Family,
+                                   address.NationalCode);
         }
         public void DeleteAdderss(long addressId)
         {
@@ -121,22 +137,15 @@ namespace Shop.Domain.UserAgg
         #region Guard
 
 
-        private void Guard(string phoneNumber,
-                  string email,
+        private void Guard( string email,
                   IUserDomainService domainService)
         {
-            NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
             NullOrEmptyDomainDataException.CheckString(email, nameof(email));
 
-            if (phoneNumber.Length != 11)
-                throw new InvalidDomainDataException(CommomMassages.NotValid("شماره موبایل"));
 
             if (email.IsValidEmail() == false)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("ایمیل"));
 
-            if (phoneNumber != PhoneNumber)
-                if (domainService.IsPhoneNumberExist(phoneNumber))
-                    throw new InvalidDomainDataException(CommomMassages.DuplicatedRecord("شماره موبایل"));
 
             if (email != Email)
                 if (domainService.IsEmailExist(email))

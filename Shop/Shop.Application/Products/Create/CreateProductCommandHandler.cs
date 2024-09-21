@@ -22,7 +22,7 @@ namespace Shop.Application.Products.Create
 
         public async Task<OperationResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var image =await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImaes(request.Title));
+            var image =await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages(request.Title));
             var product=new Product(request.Title,
                                     image,
                                     request.Description,

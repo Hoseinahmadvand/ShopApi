@@ -22,9 +22,9 @@ namespace Shop.Application.Products.AddImage
             var product=await _productRepository.GetTracking(request.ProductId);
             if (product == null)
                 return OperationResult.NotFound();
-           var imagName=await _fileService.SaveFileAndGenerateName(request.ImageFile,Directories.ProductImaesGallery(product.ImageName));
+           var imageName=await _fileService.SaveFileAndGenerateName(request.ImageFile,Directories.ProductImagesGallery(product.ImageName));
 
-            var image = new ProductImage(imagName, request.Sequence);
+            var image = new ProductImage(imageName, request.Sequence);
             product.AddImage(image);
 
             await _productRepository.Save();

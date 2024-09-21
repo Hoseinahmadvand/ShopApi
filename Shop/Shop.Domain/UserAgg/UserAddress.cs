@@ -1,5 +1,6 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
+using Common.Domain.ValueObjects;
 
 namespace Shop.Domain.UserAgg
 {
@@ -9,7 +10,7 @@ namespace Shop.Domain.UserAgg
                            string city,
                            string postalCode,
                            string postalAddress,
-                           string phoneNumber,
+                           PhoneNumber phoneNumber,
                            string name,
                            string family,
                            string nationalCode)
@@ -31,7 +32,7 @@ namespace Shop.Domain.UserAgg
         public string PostalCode { get; private set; }
         public string PostalAddress { get; private set; }
         //Resiver
-        public string PhoneNumber { get; private set; }
+        public PhoneNumber PhoneNumber { get; private set; }
         public string Name { get; private set; }
         public string Family { get; private set; }
         public string NationalCode { get; private set; }
@@ -41,12 +42,12 @@ namespace Shop.Domain.UserAgg
                     string city,
                     string postalCode,
                     string postalAddress,
-                    string phoneNumber,
+                    PhoneNumber phoneNumber,
                     string name,
                     string family,
                     string nationalCode)
         {
-            Guard(shire, city, postalCode, postalAddress, phoneNumber, name, family, nationalCode);
+            Guard(shire, city, postalCode, postalAddress, name, family, nationalCode);
             Shire = shire;
             City = city;
             PostalCode = postalCode;
@@ -61,21 +62,17 @@ namespace Shop.Domain.UserAgg
                     string city,
                     string postalCode,
                     string postalAddress,
-                    string phoneNumber,
                     string name,
                     string family,
                     string nationalCode)
         {
             NullOrEmptyDomainDataException.CheckString(shire, nameof(shire));
             NullOrEmptyDomainDataException.CheckString(city, nameof(city));
-            NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
             NullOrEmptyDomainDataException.CheckString(postalAddress, nameof(postalAddress));
             NullOrEmptyDomainDataException.CheckString(postalCode, nameof(postalCode));
             NullOrEmptyDomainDataException.CheckString(family, nameof(family));
             NullOrEmptyDomainDataException.CheckString(nationalCode, nameof(nationalCode));
 
-            if (phoneNumber.Length != 11)
-                throw new InvalidDomainDataException(CommomMassages.NotValid("شماره موبایل"));
 
             if (IranianNationalIdChecker.IsValid(nationalCode) == false)
                 throw new InvalidDomainDataException(CommomMassages.NotValid("کدملی"));

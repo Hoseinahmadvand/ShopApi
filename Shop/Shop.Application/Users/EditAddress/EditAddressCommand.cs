@@ -1,29 +1,28 @@
 ﻿using Common.Application;
 using Common.Domain.ValueObjects;
-using Shop.Domain.OrderAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Application.Orders.CheckOut
+namespace Shop.Application.Users.EditAddress
 {
-    public class CheckOrderOutCommand : IBaseCommand
+    public class EditAddressCommand:IBaseCommand
     {
-        public CheckOrderOutCommand(long userId,
-                                    Order order,
-                                    string shire,
-                                    string city,
-                                    string postalCode,
-                                    string postalAddress,
-                                    PhoneNumber phoneNumber,
-                                    string name,
-                                    string family,
-                                    string nationalCode)
+        public EditAddressCommand(long userId,
+                                  long id,
+                                  string shire,
+                                  string city,
+                                  string postalCode,
+                                  string postalAddress,
+                                  PhoneNumber phoneNumber,
+                                  string name,
+                                  string family,
+                                  string nationalCode)
         {
             UserId = userId;
-            Order = order;
+            Id = id;
             Shire = shire;
             City = city;
             PostalCode = postalCode;
@@ -34,14 +33,12 @@ namespace Shop.Application.Orders.CheckOut
             NationalCode = nationalCode;
         }
 
-        public long UserId { get; internal set; }
-        public Order Order { get; set; }
-
+        public long UserId { get; set; }
+        public long Id { get; private set; }
         public string Shire { get; private set; }
         public string City { get; private set; }
         public string PostalCode { get; private set; }
         public string PostalAddress { get; private set; }
-        //Resiver
         public PhoneNumber PhoneNumber { get; private set; }
         public string Name { get; private set; }
         public string Family { get; private set; }

@@ -14,7 +14,7 @@ namespace Shop.Application.Orders.IncreaseItemCount
 
         public async Task<OperationResult> Handle(IncreaseItemCountCommand request, CancellationToken cancellationToken)
         {
-            var currentOrder=await _orderRepository.GetCuurentUserOrder(request.UserId);
+            var currentOrder=await _orderRepository.GetCurrentUserOrder(request.UserId);
             if (currentOrder == null)
                 return OperationResult.NotFound();
 

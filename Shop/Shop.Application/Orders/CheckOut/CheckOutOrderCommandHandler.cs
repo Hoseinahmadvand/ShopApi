@@ -9,7 +9,7 @@ namespace Shop.Application.Orders.CheckOut
         private readonly IOrderRepository _orderRepository;
         public async Task<OperationResult> Handle(CheckOrderOutCommand request, CancellationToken cancellationToken)
         {
-            var currentOrder = await _orderRepository.GetCuurentUserOrder(request.UserId);
+            var currentOrder = await _orderRepository.GetCurrentUserOrder(request.UserId);
             if (currentOrder == null)
                 return OperationResult.NotFound();
 

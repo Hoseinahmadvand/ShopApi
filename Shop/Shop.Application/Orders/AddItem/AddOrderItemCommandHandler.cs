@@ -23,7 +23,7 @@ internal class AddOrderItemCommandHandler : IBaseCommandHandler<AddOrderItemComm
         if (inventory.Count < request.Count)
             return OperationResult.Error("تعداد درخواستی ا موجودی انبار بیشتر است .");
 
-        var order = await _orderRepository.GetCuurentUserOrder(request.UserId);
+        var order = await _orderRepository.GetCurrentUserOrder(request.UserId);
         if (order == null)
             order = new Order(request.UserId);
 

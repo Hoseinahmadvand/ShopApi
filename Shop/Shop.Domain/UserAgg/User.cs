@@ -59,12 +59,12 @@ namespace Shop.Domain.UserAgg
             Gender = gender;
         }
 
-        public static User RegisterUser(string email,
+        public static User RegisterUser(
                                         PhoneNumber phoneNumber,
                                         string password,
                                         IUserDomainService domainService)
         {
-            return new User("", "", phoneNumber, email, password, Gender.None, domainService);
+            return new User("", "", phoneNumber, null, password, Gender.None, domainService);
         }
 
 

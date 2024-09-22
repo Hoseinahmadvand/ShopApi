@@ -6,7 +6,7 @@ namespace Shop.Domain.UserAgg
 {
     public class Wallet : BaseEntity
     {
-        public Wallet(long userId, int price, string description, bool isFinally, DateTime? finallyDate, WalletType type)
+        public Wallet(long userId, int price, string description, bool isFinally, WalletType type)
         {
             if (price < 500)
                 throw new InvalidDomainDataException();
@@ -15,8 +15,9 @@ namespace Shop.Domain.UserAgg
             Price = price;
             Description = description;
             IsFinally = isFinally;
-            FinallyDate = finallyDate;
             Type = type;
+            if(isFinally==true)
+                FinallyDate = DateTime.Now;
         }
 
         public long UserId { get; internal set; }

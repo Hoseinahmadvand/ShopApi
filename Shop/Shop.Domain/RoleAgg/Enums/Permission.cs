@@ -1,9 +1,8 @@
-﻿namespace Shop.Domain.RoleAgg.Enums
+﻿namespace Shop.Domain.RoleAgg.Enums;
+
+public enum Permission
 {
-    public enum Permission
-    {
-        PanelAdmin,
-        EditProfile,
-        ChangePassword
-    }
+    PanelAdmin,
+    EditProfile,
+    ChangePassword
 }

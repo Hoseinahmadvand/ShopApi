@@ -1,7 +1,6 @@
-﻿namespace Shop.Domain.ProductAgg.Services
+﻿namespace Shop.Domain.ProductAgg.Services;
+
+public interface IProductDomainService
 {
-    public interface IProductDomainService
-    {
-        bool SlugIsExist(string slug);
-    }
+    bool SlugIsExist(string slug);
 }

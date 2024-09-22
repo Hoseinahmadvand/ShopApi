@@ -1,10 +1,9 @@
-﻿namespace Shop.Domain.SellerAgg.Enums
+﻿namespace Shop.Domain.SellerAgg.Enums;
+
+public enum SellerStatus
 {
-    public enum SellerStatus
-    {
-        New,
-        Accepted,
-        InActive,
-        Rejected
-    }
+    New,
+    Accepted,
+    InActive,
+    Rejected
 }

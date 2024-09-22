@@ -1,8 +1,7 @@
-﻿namespace Shop.Domain.UserAgg.Enums
+﻿namespace Shop.Domain.UserAgg.Enums;
+
+public enum WalletType
 {
-    public enum WalletType
-    {
-        Deposit,
-        Withdrawal
-    }
+    Deposit,
+    Withdrawal
 }

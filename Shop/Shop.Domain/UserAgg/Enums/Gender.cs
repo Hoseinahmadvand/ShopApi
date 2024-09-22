@@ -1,9 +1,8 @@
-﻿namespace Shop.Domain.UserAgg.Enums
+﻿namespace Shop.Domain.UserAgg.Enums;
+
+public enum Gender
 {
-    public enum Gender
-    {
-        None,
-        Male,
-        Famele
-    }
+    None,
+    Male,
+    Famele
 }

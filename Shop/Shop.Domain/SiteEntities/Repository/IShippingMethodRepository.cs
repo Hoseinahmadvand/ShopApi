@@ -1,7 +1,6 @@
-﻿namespace Shop.Domain.SiteEntities.Repository
+﻿namespace Shop.Domain.SiteEntities.Repository;
+
+public interface IShippingMethodRepository
 {
-    public interface IShippingMethodRepository
-    {
-        void Delete(ShippingMethod method);
-    }
+    void Delete(ShippingMethod method);
 }

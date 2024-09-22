@@ -1,9 +1,8 @@
-﻿namespace Shop.Domain.CommentAgg.Enums
+﻿namespace Shop.Domain.CommentAgg.Enums;
+
+public enum CommentStatus
 {
-    public enum CommentStatus
-    {
-        Pending,
-        Accepted,
-        Rejected
-    }
+    Pending,
+    Accepted,
+    Rejected
 }

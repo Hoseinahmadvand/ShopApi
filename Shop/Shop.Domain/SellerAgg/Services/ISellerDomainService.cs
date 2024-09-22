@@ -1,8 +1,7 @@
-﻿namespace Shop.Domain.SellerAgg.Services
+﻿namespace Shop.Domain.SellerAgg.Services;
+
+public interface ISellerDomainService
 {
-    public interface ISellerDomainService
-    {
-        bool IsValidSellerInformation(Seller seller);
-        bool NationalCodeExistInDataBase(string nationalCode);
-    }
+    bool IsValidSellerInformation(Seller seller);
+    bool NationalCodeExistInDataBase(string nationalCode);
 }

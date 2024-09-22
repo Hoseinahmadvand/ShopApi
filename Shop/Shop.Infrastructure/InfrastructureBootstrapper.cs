@@ -8,6 +8,7 @@ using Shop.Domain.RoleAgg.Repository;
 using Shop.Domain.SellerAgg.Repository;
 using Shop.Domain.SiteEntities.Repository;
 using Shop.Domain.UserAgg.Repository;
+using Shop.Infrastructure.Persistent.Dapper;
 using Shop.Infrastructure.Persistent.Ef;
 using Shop.Infrastructure.Persistent.Ef.CategoryAgg;
 using Shop.Infrastructure.Persistent.Ef.CommentAgg;
@@ -42,7 +43,7 @@ namespace Shop.Infrastructure
 
             //connection to DB
 
-            //services.AddTransient(_ => new DapperContext(connectionString));
+            services.AddTransient(_ => new DapperContext(connectionString));
 
             services.AddDbContext<ShopContext>(option =>
             {

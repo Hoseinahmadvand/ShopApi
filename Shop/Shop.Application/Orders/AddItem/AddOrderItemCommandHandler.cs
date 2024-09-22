@@ -17,7 +17,7 @@ internal class AddOrderItemCommandHandler : IBaseCommandHandler<AddOrderItemComm
 
     public async Task<OperationResult> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
     {
-        var inventory = await _sellerRepository.GetInventoryBy(request.InventoryId);
+        var inventory = await _sellerRepository.GetInventoryById(request.InventoryId);
         if (inventory == null)
             return OperationResult.NotFound();
         if (inventory.Count < request.Count)

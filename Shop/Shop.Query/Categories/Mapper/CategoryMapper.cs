@@ -1,9 +1,9 @@
 ﻿using Shop.Domain.CategoryAgg;
 using Shop.Query.Categories.DTOs;
 
-namespace Shop.Query.Categories.CategoryMapper;
+namespace Shop.Query.Categories.Mapper;
 
-internal static class CategoryMapper
+public static class CategoryMapper
 {
     internal static CategoryDto Map(this Category category)
     {
@@ -21,7 +21,25 @@ internal static class CategoryMapper
             Childs = category.Childs.MapChildern()
         };
     }
-    internal static List<ChildCategoryDto> MapChildern(this List<Category> childern)
+    internal static List<CategoryDto> Map(this List<Category> categories)
+    {
+        var model = new List<CategoryDto>();
+        categories.ForEach(category =>
+        {
+            model.Add(new CategoryDto()
+            {
+                Title = category.Title,
+                Slug = category.Slug,
+                Id = category.Id,
+                SeoData = category.SeoData,
+                CreationDate = category.CreationDate,
+                Childs = category.Childs.MapChildern()
+            });
+        });
+        return model;
+    }
+
+    public static List<ChildCategoryDto> MapChildern(this List<Category> childern)
     {
         var model = new List<ChildCategoryDto>();
         childern.ForEach(c =>

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\GetByParentId\" />
-    <Folder Include="Categories\GetList\" />
-    <Folder Include="Comments\" />
-    <Folder Include="Orders\" />
     <Folder Include="Products\" />
     <Folder Include="Roles\" />
     <Folder Include="Sellers\" />

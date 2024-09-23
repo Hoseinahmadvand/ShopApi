@@ -31,6 +31,7 @@ public class Order : AggregateRoot
     public OrderShippingMethod? ShippingMethod { get; private set; }
     public List<OrderItem> Items { get; private set; }
     public DateTime? LastUpdate { get; set; }
+   // public DateTime? LastUpdate { get;private set; }
     public int TotalPrice
     {
         get

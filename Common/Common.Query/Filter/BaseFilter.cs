@@ -31,13 +31,11 @@ public class BaseFilter
         StartPage = (currentPage - 4 <= 0) ? 1 : currentPage - 4;
     }
 }
-
 public class BaseFilterParam
 {
     public int PageId { get; set; } = 1;
-    public int Take { get; set; } = 10;
+    public int Take { get; set; } = 12;
 }
-
 public class BaseFilter<TData, TParam> : BaseFilter
 where TParam : BaseFilterParam
 where TData : BaseDto

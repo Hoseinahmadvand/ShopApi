@@ -1,22 +1,12 @@
-﻿using Common.Domain;
-using Common.Domain.ValueObjects;
+﻿using Common.Application;
 
-namespace Shop.Domain.OrderAgg;
+namespace Shop.Application.Orders.CheckOut;
 
-public class OrderAddress:BaseEntity
+public class CheckOutOrderCommand : IBaseCommand
 {
-  
-    public OrderAddress(long orderId,
-                        string shire,
-                        string city,
-                        string postalCode,
-                        string postalAddress,
-                        string phoneNumber,
-                        string name,
-                        string family,
-                        string nationalCode)
+    public CheckOutOrderCommand(long userId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode, long shippingMethodId)
     {
-        OrderId = orderId;
+        UserId = userId;
         Shire = shire;
         City = city;
         PostalCode = postalCode;
@@ -25,19 +15,17 @@ public class OrderAddress:BaseEntity
         Name = name;
         Family = family;
         NationalCode = nationalCode;
+        ShippingMethodId = shippingMethodId;
     }
 
-    public long OrderId { get; internal set; }
-    public Order Order { get; set; }
-
+    public long UserId { get; private set; }
     public string Shire { get; private set; }
     public string City { get; private set; }
     public string PostalCode { get; private set; }
     public string PostalAddress { get; private set; }
-    //Resiver
     public string PhoneNumber { get; private set; }
     public string Name { get; private set; }
     public string Family { get; private set; }
     public string NationalCode { get; private set; }
-   
+    public long ShippingMethodId { get; private set; }
 }

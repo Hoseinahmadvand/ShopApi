@@ -34,8 +34,6 @@ namespace Shop.Infrastructure.Persistent.Ef.UserAgg
                 .HasMaxLength(50);
 
 
-
-
             builder.OwnsMany(b => b.Addresses, option =>
             {
                 option.HasIndex(b => b.UserId);

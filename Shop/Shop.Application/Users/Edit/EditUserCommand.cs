@@ -9,7 +9,7 @@ namespace Shop.Application.Users.Edit
     {
         public EditUserCommand(string name,
                                string family,
-                               PhoneNumber phoneNumber,
+                               string phoneNumber,
                                string email,
                                Gender gender,
                                long userId,
@@ -29,7 +29,7 @@ namespace Shop.Application.Users.Edit
         public IFormFile? Avatar { get; set; }
         public string Name { get; private set; }
         public string Family { get; private set; }
-        public PhoneNumber PhoneNumber { get; private set; }
+        public string PhoneNumber { get; private set; }
         public string Email { get; private set; }
         public Gender Gender { get; private set; }
     }

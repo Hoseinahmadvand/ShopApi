@@ -4,6 +4,10 @@ namespace Shop.Domain.OrderAgg.ValueObjects;
 
 public class OrderShippingMethod : ValueObject
 {
+    private OrderShippingMethod()
+    {
+        
+    }
     public OrderShippingMethod(int shippingPrice, string shippingType)
     {
         ShippingCost = shippingPrice;

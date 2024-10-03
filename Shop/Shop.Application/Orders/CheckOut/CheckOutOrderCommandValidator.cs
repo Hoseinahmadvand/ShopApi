@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Shop.Application.Orders.CheckOut
 {
-    internal class CheckOutOrderCommandValidator : AbstractValidator<CheckOrderOutCommand>
+    internal class CheckOutOrderCommandValidator : AbstractValidator<CheckOutOrderCommand>
     {
         public CheckOutOrderCommandValidator()
         {

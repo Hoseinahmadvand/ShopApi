@@ -1,5 +1,4 @@
 ﻿using Common.Query;
-using Common.Query.Filter;
 using Shop.Domain.OrderAgg;
 using Shop.Domain.OrderAgg.Enums;
 using Shop.Domain.OrderAgg.ValueObjects;
@@ -16,8 +15,4 @@ public class OrderDto : BaseDto
     public OrderShippingMethod? ShippingMethod { get; set; }
     public List<OrderItemDto> Items { get; set; }
     public DateTime? LastUpdate { get; set; }
-}
-public class OrderFilterResult : BaseFilter<OrderFilterData, OrderFilterParams>
-{
-
 }

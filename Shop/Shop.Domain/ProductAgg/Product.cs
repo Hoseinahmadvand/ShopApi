@@ -16,7 +16,7 @@ public class Product : AggregateRoot
     public string ImageName { get; private set; }
     public string Description { get; private set; }
     public long CategoryId { get; private set; }
-    public long? SubCategoryId { get; private set; }
+    public long SubCategoryId { get; private set; }
     public long? SecondarySubCategoryId { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }

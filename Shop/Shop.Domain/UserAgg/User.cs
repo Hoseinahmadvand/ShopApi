@@ -8,12 +8,16 @@ namespace Shop.Domain.UserAgg;
 
 public class User : AggregateRoot
 {
+    private User()
+    {
+        
+    }
 
 
     public string Name { get; private set; }
     public string Family { get; private set; }
     public string Avatar { get; private set; }
-    public PhoneNumber PhoneNumber { get; private set; }
+    public string PhoneNumber { get; private set; }
     public string Email { get; private set; }
     public string Password { get; private set; }
     public Gender Gender { get; private set; }
@@ -27,7 +31,7 @@ public class User : AggregateRoot
 
     public User(string name,
              string family,
-             PhoneNumber phoneNumber,
+             string phoneNumber,
              string email,
              string password,
              Gender gender,
@@ -46,7 +50,7 @@ public class User : AggregateRoot
 
     public void Edit(string name,
               string family,
-              PhoneNumber phoneNumber,
+              string phoneNumber,
               string email,
               Gender gender,
               IUserDomainService domainService)
@@ -60,7 +64,7 @@ public class User : AggregateRoot
     }
 
     public static User RegisterUser(
-                                    PhoneNumber phoneNumber,
+                                    string phoneNumber,
                                     string password,
                                     IUserDomainService domainService)
     {

@@ -6,6 +6,11 @@ namespace Shop.Domain.UserAgg;
 
 public class UserAddress : BaseEntity
 {
+    private UserAddress()
+    {
+            
+    }
+
     public UserAddress(string shire,
                        string city,
                        string postalCode,

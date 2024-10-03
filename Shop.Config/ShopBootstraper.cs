@@ -12,21 +12,32 @@ using Shop.Domain.UserAgg.Services;
 using Shop.Infrastructure;
 using Shop.Query.Categories.GetById;
 
-namespace Shop.Config
+namespace Shop.Config;
+
+public static class ShopBootstraper
 {
-    public static class ShopBootstraper
+    public static void Configure(this IServiceCollection services, string connectionString)
     {
-        public static void Configure(this IServiceCollection services,string connectionString)
-        {
-          InfrastructureBootstrapper.Init(services, connectionString);
+        InfrastructureBootstrapper.Init(services, connectionString);
 
-            services.AddMediatR(typeof(Directories).Assembly);
-            services.AddMediatR(typeof(GetCategorByIdQuery).Assembly);
+        //services.AddMediatR(typeof(Directories).Assembly);
+        //services.AddMediatR(typeof(GetCategoryByIdQuery).Assembly);
+        var assemblies = new[]
+     {
+            typeof(Directories).Assembly,
+            typeof(GetCategoryByIdQuery).Assembly
+        };
 
-            services.AddTransient<IProductDomainService, ProductDomainService>();
-            services.AddTransient<IUserDomainService, UserDomainService>();
-            services.AddTransient<ICategoryDomainService, CategoryDomainService>();
-            services.AddTransient<ISellerDomainService, SellerDomainService>();
-        }
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+
+        services.AddTransient<IProductDomainService, ProductDomainService>();
+        services.AddTransient<IUserDomainService, UserDomainService>();
+        services.AddTransient<ICategoryDomainService, CategoryDomainService>();
+        services.AddTransient<ISellerDomainService, SellerDomainService>();
+
+
+        //services.AddValidatorsFromAssembly(typeof(CreateRoleCommandValidator).Assembly);
+
+        //services.InitFacadeDependency();
     }
 }

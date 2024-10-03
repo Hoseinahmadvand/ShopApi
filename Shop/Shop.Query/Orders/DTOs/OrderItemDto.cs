@@ -9,6 +9,8 @@ public class OrderItemDto : BaseDto
     public string ShopName { get; set; }
     public int Price { get; set; }
     public int Count { get; set; }
-    public ProductOrderItem Products { get; set; }
+    public string ProductTitle { get; set; }
+    public string ProductSlug { get; set; }
+    public string ProductImageName { get; set; }
     public int TotalPrice => Price * Count;
 }

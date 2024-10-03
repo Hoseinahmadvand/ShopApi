@@ -3,5 +3,5 @@ using Shop.Query.Categories.DTOs;
 
 namespace Shop.Query.Categories.GetById
 {
-    public record GetCategorByIdQuery(long Id) : IQuery<CategoryDto>;
+    public record GetCategoryByIdQuery(long Id) : IQuery<CategoryDto>;
 }

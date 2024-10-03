@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Roles\" />
-    <Folder Include="Sellers\" />
-    <Folder Include="SiteEntities\" />
     <Folder Include="Users\" />
   </ItemGroup>
 

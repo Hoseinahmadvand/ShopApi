@@ -64,60 +64,37 @@ public static class ProductMapper
 
     public static async Task SetCategories(this ProductDto product, ShopContext context)
     {
-        var category = await context
-            .Categories
-            .Where(c => c.Id == product.Category.Id)
-            .Select(c => new ProductCategoryDto()
-            {
-                Id = c.Id,
-                Title = c.Title,
-                SeoData = c.SeoData,
-                Slug = c.Slug,
-                ParentId = c.ParentId
-            })
-            .FirstOrDefaultAsync();
-
-        if (category != null)
-            product.Category = category;
-
-
-
-        var subCategory = await context
-            .Categories
-            .Where(c => c.Id == product.SubCategory.Id)
-            .Select(c => new ProductCategoryDto()
-            {
-                Id = c.Id,
-                Title = c.Title,
-                SeoData = c.SeoData,
-                Slug = c.Slug,
-                ParentId = c.ParentId
-            }).FirstOrDefaultAsync();
-
-        if (subCategory != null)
-            product.SubCategory = subCategory;
-
-
-
+        var categories = await context.Categories
+           .Where(r => r.Id == product.Category.Id || r.Id == product.SubCategory.Id)
+           .Select(s => new ProductCategoryDto()
+           {
+               Id = s.Id,
+               Slug = s.Slug,
+               ParentId = s.ParentId,
+               SeoData = s.SeoData,
+               Title = s.Title
+           }).ToListAsync();
 
         if (product.SecondarySubCategory != null)
         {
-            var secodarySubCategory = await context
-            .Categories
-             .Where(c => c.Id == product.SecondarySubCategory.Id)
-            .Select(c => new ProductCategoryDto()
-            {
-                Id = c.Id,
-                Title = c.Title,
-                SeoData = c.SeoData,
-                Slug = c.Slug,
-                ParentId = c.ParentId
-            })
-            .FirstOrDefaultAsync();
+            var secondarySubCategory = await context.Categories
+                .Where(f => f.Id == product.SecondarySubCategory.Id)
+                .Select(s => new ProductCategoryDto()
+                {
+                    Id = s.Id,
+                    Slug = s.Slug,
+                    ParentId = s.ParentId,
+                    SeoData = s.SeoData,
+                    Title = s.Title
+                })
+                .FirstOrDefaultAsync();
 
-            if (secodarySubCategory != null)
-                product.SecondarySubCategory = secodarySubCategory;
+            if (secondarySubCategory != null)
+                product.SecondarySubCategory = secondarySubCategory;
         }
-
+        product.Category = categories.First(r => r.Id == product.Category.Id);
+        product.SubCategory = categories.First(r => r.Id == product.SubCategory.Id);
     }
+
 }
+

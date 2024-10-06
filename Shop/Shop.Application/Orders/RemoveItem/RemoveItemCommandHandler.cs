@@ -3,7 +3,7 @@ using Shop.Domain.OrderAgg.Repository;
 
 namespace Shop.Application.Orders.RemoveItem
 {
-    internal class RemoveItemCommandHandler : IBaseCommandHandler<RemoveItemCommand>
+    internal class RemoveItemCommandHandler : IBaseCommandHandler<RemoveOrderItemCommand>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -12,7 +12,7 @@ namespace Shop.Application.Orders.RemoveItem
             _orderRepository = orderRepository;
         }
 
-        public async Task<OperationResult> Handle(RemoveItemCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(RemoveOrderItemCommand request, CancellationToken cancellationToken)
         {
             var currentOrder = await _orderRepository.GetCurrentUserOrder(request.UserId);
             if (currentOrder == null)

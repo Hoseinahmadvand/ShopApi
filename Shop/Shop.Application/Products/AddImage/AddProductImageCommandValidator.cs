@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace Shop.Application.Products.AddImage
 {
-    public class AddProductImaeCommandValidator:AbstractValidator<AddProductImaeCommand> 
+    public class AddProductImageCommandValidator:AbstractValidator<AddProductImageCommand> 
     {
-        public AddProductImaeCommandValidator() 
+        public AddProductImageCommandValidator() 
         {
             RuleFor(r=>r.ImageFile)
                 .NotNull().WithMessage(ValidationMessages.required("عکس"))

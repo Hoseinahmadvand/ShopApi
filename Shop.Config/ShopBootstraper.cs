@@ -10,6 +10,7 @@ using Shop.Domain.ProductAgg.Services;
 using Shop.Domain.SellerAgg.Services;
 using Shop.Domain.UserAgg.Services;
 using Shop.Infrastructure;
+using Shop.Persentation.Facade;
 using Shop.Query.Categories.GetById;
 
 namespace Shop.Config;
@@ -20,14 +21,11 @@ public static class ShopBootstraper
     {
         InfrastructureBootstrapper.Init(services, connectionString);
 
-        //services.AddMediatR(typeof(Directories).Assembly);
-        //services.AddMediatR(typeof(GetCategoryByIdQuery).Assembly);
         var assemblies = new[]
-     {
+        {
             typeof(Directories).Assembly,
             typeof(GetCategoryByIdQuery).Assembly
         };
-
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
         services.AddTransient<IProductDomainService, ProductDomainService>();
@@ -38,6 +36,6 @@ public static class ShopBootstraper
 
         //services.AddValidatorsFromAssembly(typeof(CreateRoleCommandValidator).Assembly);
 
-        //services.InitFacadeDependency();
+        services.InitFacadeDependency();
     }
 }

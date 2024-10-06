@@ -2,7 +2,7 @@
 
 namespace Shop.Application.Orders.DecreaseItemCount
 {
-    public class DecreaseItemCountCommadValidator:AbstractValidator<DecreaseItemCountCommad>
+    public class DecreaseItemCountCommadValidator:AbstractValidator<DecreaseOrderItemCountCommand>
     {
         public DecreaseItemCountCommadValidator()
         {

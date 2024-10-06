@@ -6,7 +6,7 @@ using Shop.Query.Orders.Mapper;
 
 namespace Shop.Query.Orders.GetByFilter;
 
-internal class GetOrderByFilterHandler : IQueryHandler<GetOrderByFilter, OrderFilterResult>
+internal class GetOrderByFilterHandler : IQueryHandler<GetOrdersByFilterQuery, OrderFilterResult>
 {
     private readonly ShopContext _context;
 
@@ -15,7 +15,7 @@ internal class GetOrderByFilterHandler : IQueryHandler<GetOrderByFilter, OrderFi
         _context = context;
     }
 
-    public async Task<OrderFilterResult> Handle(GetOrderByFilter request, CancellationToken cancellationToken)
+    public async Task<OrderFilterResult> Handle(GetOrdersByFilterQuery request, CancellationToken cancellationToken)
     {
         var @params = request.FilterParams;
         var result =  _context.Orders.OrderByDescending(c => c.CreationDate).AsQueryable();

@@ -7,7 +7,7 @@ using Shop.Query.Orders.Mapper;
 
 namespace Shop.Query.Orders.GetById;
 
-internal class GetOrderByIdHandler : IQueryHandler<GetOrderById, OrderDto?>
+internal class GetOrderByIdHandler : IQueryHandler<GetOrderByIdQuery, OrderDto?>
 {
     private readonly ShopContext _context;
     private readonly DapperContext _dapperContext;
@@ -18,7 +18,7 @@ internal class GetOrderByIdHandler : IQueryHandler<GetOrderById, OrderDto?>
         _dapperContext = dapperContext;
     }
 
-    public async Task<OrderDto?> Handle(GetOrderById request, CancellationToken cancellationToken)
+    public async Task<OrderDto?> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
     {
         var order = await _context.Orders.FirstOrDefaultAsync(c => c.Id == request.OrderId, cancellationToken);
         var orderDto = order.Map();

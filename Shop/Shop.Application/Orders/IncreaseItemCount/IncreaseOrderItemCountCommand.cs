@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Orders.IncreaseItemCount
 {
-    public record IncreaseItemCountCommand(long UserId,long ItemId,int Count):IBaseCommand;
+    public record IncreaseOrderItemCountCommand(long UserId,long ItemId,int Count):IBaseCommand;
 }

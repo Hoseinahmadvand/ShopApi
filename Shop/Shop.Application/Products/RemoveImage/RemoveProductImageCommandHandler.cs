@@ -5,18 +5,18 @@ using Shop.Domain.ProductAgg.Repository;
 
 namespace Shop.Application.Products.RemoveImage
 {
-    internal class RemoveProductImaeCommandHandler : IBaseCommandHandler<RemoveProductImaeCommand>
+    internal class RemoveProductImageCommandHandler : IBaseCommandHandler<RemoveProductImageCommand>
     {
         private readonly IProductRepository _productRepository;
         private readonly IFileService _fileService;
 
-        public RemoveProductImaeCommandHandler(IProductRepository productRepository, IFileService fileService)
+        public RemoveProductImageCommandHandler(IProductRepository productRepository, IFileService fileService)
         {
             _productRepository = productRepository;
             _fileService = fileService;
         }
 
-        public async Task<OperationResult> Handle(RemoveProductImaeCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(RemoveProductImageCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetTracking(request.ProductId);
             if (product == null)

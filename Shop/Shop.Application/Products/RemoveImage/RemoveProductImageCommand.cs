@@ -2,7 +2,7 @@
 
 namespace Shop.Application.Products.RemoveImage
 { 
-    public record RemoveProductImaeCommand(long ProductId,
+    public record RemoveProductImageCommand(long ProductId,
                                            long ImageId) : IBaseCommand;
 
 }

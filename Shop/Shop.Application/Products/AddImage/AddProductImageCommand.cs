@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Shop.Application.Products.AddImage
 {
-    public class AddProductImaeCommand : IBaseCommand
+    public class AddProductImageCommand : IBaseCommand
     {
-        public AddProductImaeCommand(IFormFile imageFile,
+        public AddProductImageCommand(IFormFile imageFile,
                                      long productId,
                                      int sequence)
         {

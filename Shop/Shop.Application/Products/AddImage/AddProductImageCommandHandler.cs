@@ -6,18 +6,18 @@ using Shop.Domain.ProductAgg.Repository;
 
 namespace Shop.Application.Products.AddImage
 {
-    internal class AddProductImaeCommandHandler : IBaseCommandHandler<AddProductImaeCommand>
+    internal class AddProductImageCommandHandler : IBaseCommandHandler<AddProductImageCommand>
     {
         private readonly IProductRepository _productRepository;
         private readonly IFileService _fileService;
 
-        public AddProductImaeCommandHandler(IProductRepository productRepository, IFileService fileService)
+        public AddProductImageCommandHandler(IProductRepository productRepository, IFileService fileService)
         {
             _productRepository = productRepository;
             _fileService = fileService;
         }
 
-        public async Task<OperationResult> Handle(AddProductImaeCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(AddProductImageCommand request, CancellationToken cancellationToken)
         {
             var product=await _productRepository.GetTracking(request.ProductId);
             if (product == null)

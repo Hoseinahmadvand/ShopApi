@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Persistent.Ef;
 using Shop.Query.Users.DTOs;
+using Shop.Query.Users.Mapper;
 
 namespace Shop.Query.Users.GetByPhoneNumber;
 

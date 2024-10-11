@@ -20,7 +20,11 @@ internal class GetCategoryListHandler : IQueryHandler<GetCategoryList, List<Cate
 
     public async Task<List<CategoryDto>> Handle(GetCategoryList request, CancellationToken cancellationToken)
     {
-        var result =await _context.Categories.ToListAsync(cancellationToken);
+        var result =await _context.Categories
+            .Where(c=>c.ParentId==null)
+            .Include(c=>c.Childs)
+            .ThenInclude(c => c.Childs)
+            .ToListAsync(cancellationToken);
         return result.Map();
     }
 }

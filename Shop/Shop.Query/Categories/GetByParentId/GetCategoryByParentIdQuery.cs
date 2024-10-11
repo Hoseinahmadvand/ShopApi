@@ -1,8 +1,8 @@
 ﻿using Common.Query;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Persistent.Ef;
-using Shop.Query.Categories.Mapper;
 using Shop.Query.Categories.DTOs;
+using Shop.Query.Categories.Mapper;
 
 namespace Shop.Query.Categories.GetByParentId;
 
@@ -20,8 +20,9 @@ internal class GetCategoryByParentIdQueryHandler : IQueryHandler<GetCategoryByPa
     public async Task<List<ChildCategoryDto>> Handle(GetCategoryByParentIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Categories
-            .Where(c => c.ParentId == request.ParentId)
-            .ToListAsync(cancellationToken);
+             .Include(c => c.Childs)
+             .Where(c => c.ParentId == request.ParentId)
+             .ToListAsync(cancellationToken);
         return result.MapChildern();
     }
 }

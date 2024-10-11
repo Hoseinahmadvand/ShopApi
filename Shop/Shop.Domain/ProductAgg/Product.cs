@@ -54,7 +54,7 @@ public class Product : AggregateRoot
     public void Edit(string title,
                      string description,
                      long categoryId,
-                     long? subCategoryId,
+                     long subCategoryId,
                      long? secondarySubCategoryId,
                      string slug,
                      IProductDomainService domainService,

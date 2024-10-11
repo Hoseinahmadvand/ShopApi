@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application._Utilities;
 using Shop.Application.Categories;
 using Shop.Application.Products;
+using Shop.Application.Roles.Create;
 using Shop.Application.Sellers;
 using Shop.Application.Users;
 using Shop.Domain.CategoryAgg.Service;
@@ -19,10 +21,14 @@ public static class ShopBootstraper
 {
     public static void Configure(this IServiceCollection services, string connectionString)
     {
+
         InfrastructureBootstrapper.Init(services, connectionString);
 
+        //services.AddMediatR(typeof(Directories).Assembly);
+        //services.AddMediatR(typeof(GetCategoryByIdQuery).Assembly);
+
         var assemblies = new[]
-        {
+ {
             typeof(Directories).Assembly,
             typeof(GetCategoryByIdQuery).Assembly
         };
@@ -34,7 +40,7 @@ public static class ShopBootstraper
         services.AddTransient<ISellerDomainService, SellerDomainService>();
 
 
-        //services.AddValidatorsFromAssembly(typeof(CreateRoleCommandValidator).Assembly);
+        services.AddValidatorsFromAssembly(typeof(CreateRoleCommandValidator).Assembly);
 
         services.InitFacadeDependency();
     }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.AspNetCore\Common.AspNetCore.csproj" />
     <ProjectReference Include="..\..\Shop.Config\Shop.Config.csproj" />
   </ItemGroup>
 

@@ -14,13 +14,14 @@ namespace Common.Application.Validation
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+     
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var errors = _validators
-                .Select(v => v.Validate(request))
-                .SelectMany(result => result.Errors)
-                .Where(error => error != null)
-                .ToList();
+               .Select(v => v.Validate(request))
+               .SelectMany(result => result.Errors)
+               .Where(error => error != null)
+               .ToList();
 
             if (errors.Any())
             {
@@ -35,11 +36,6 @@ namespace Common.Application.Validation
             }
             var response = await next();
             return response;
-        }
-
-        public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

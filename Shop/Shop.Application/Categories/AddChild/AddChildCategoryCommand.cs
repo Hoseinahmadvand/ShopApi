@@ -6,5 +6,5 @@ namespace Shop.Application.Categories.AddChild
     public record AddChildCategoryCommand(long ParentId,
                                            string Title,
                                            string Slug,
-                                           SeoData SeoData) : IBaseCommand;
+                                           SeoData SeoData) : IBaseCommand<long>;
 }

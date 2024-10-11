@@ -21,17 +21,17 @@ internal class CategoryFacade : ICategoryFacade
     }
 
     #region Commands
-    public async Task<OperationResult> AddChild(AddChildCategoryCommand command)
+    public async Task<OperationResult<long>> Create(CreateCategoryCommand command)
     {
-        return await _mediator.Send(command);
-    }
-
-    public async Task<OperationResult> Create(CreateCategoryCommand command)
-    {
+        // await _cache.RemoveAsync(CacheKeys.Categories);
         return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> Edit(EditCategoryCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+    async Task<OperationResult<long>> ICategoryFacade.AddChild(AddChildCategoryCommand command)
     {
         return await _mediator.Send(command);
     }
@@ -57,5 +57,6 @@ internal class CategoryFacade : ICategoryFacade
     {
         return await _mediator.Send(new RemoveCategoryCommand(categoryId));
     }
+
     #endregion
 }

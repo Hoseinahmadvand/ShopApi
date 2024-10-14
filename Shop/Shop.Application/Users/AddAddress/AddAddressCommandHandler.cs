@@ -21,7 +21,7 @@ namespace Shop.Application.Users.AddAddress
 
             var address = new UserAddress(request.Shire, request.City, request.PostalCode, request.PostalAddress, request.PhoneNumber, request.Name, request.Family, request.NationalCode);
 
-            user.AddAdderss(address);
+            user.AddAddress(address);
             await _userRepository.Save();
             return OperationResult.Success();
         }

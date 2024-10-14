@@ -18,7 +18,7 @@ namespace Shop.Application.Users.Register
 
         public async Task<OperationResult> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            var user=User.RegisterUser(request.PhoneNumber, request.Password,_userDomainService);
+            var user=User.RegisterUser(request.PhoneNumber.Value, request.Password,_userDomainService);
             _userRepository.Add(user);
             await _userRepository.Save();
             return OperationResult.Success();

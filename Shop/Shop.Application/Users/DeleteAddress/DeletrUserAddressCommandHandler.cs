@@ -18,7 +18,7 @@ namespace Shop.Application.Users.DeleteAddress
             if (user == null)
                 return OperationResult.NotFound();
 
-            user.DeleteAdderss(request.AddressId);
+            user.DeleteAddress(request.AddressId);
             await _userRepository.Save();
             return OperationResult.Success();
         }

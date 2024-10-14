@@ -1,6 +1,7 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Shop.Domain.OrderAgg.Enums;
+using Shop.Domain.OrderAgg.Events;
 using Shop.Domain.OrderAgg.ValueObjects;
 
 namespace Shop.Domain.OrderAgg;
@@ -17,7 +18,7 @@ public class Order : AggregateRoot
     public Order(long userId)
     {
         UserId = userId;
-        Status = OrderStatus.Pennding;
+        Status = OrderStatus.Pending;
         Items = new List<OrderItem>();
     }
 
@@ -31,7 +32,7 @@ public class Order : AggregateRoot
     public OrderShippingMethod? ShippingMethod { get; private set; }
     public List<OrderItem> Items { get; private set; }
     public DateTime? LastUpdate { get; set; }
-   // public DateTime? LastUpdate { get;private set; }
+    // public DateTime? LastUpdate { get;private set; }
     public int TotalPrice
     {
         get
@@ -46,6 +47,12 @@ public class Order : AggregateRoot
     }
     public int ItemCount => Items.Count;
 
+    public void Finally()
+    {
+        Status = OrderStatus.Finally;
+        LastUpdate = DateTime.Now;
+        AddDomainEvent(new OrderFinalized(Id));
+    }
 
     #region Items 
 
@@ -78,7 +85,7 @@ public class Order : AggregateRoot
 
         currentItem.ChangeCount(count);
     }
-    public void IncreaseItemCount(long itemId,int count)
+    public void IncreaseItemCount(long itemId, int count)
     {
         ChangeOrderGuard();
         var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
@@ -88,7 +95,7 @@ public class Order : AggregateRoot
 
         currentItem.IncreaseCount(count);
     }
-    public void DecreaseItemCount(long itemId,int count)
+    public void DecreaseItemCount(long itemId, int count)
     {
         ChangeOrderGuard();
         var currentItem = Items.FirstOrDefault(i => i.Id == itemId);
@@ -126,7 +133,7 @@ public class Order : AggregateRoot
 
     private void ChangeOrderGuard()
     {
-        if (Status != OrderStatus.Pennding)
+        if (Status != OrderStatus.Pending)
             throw new InvalidDomainDataException("امکان ویرایش این سفارش وجود ندارد .");
 
     }

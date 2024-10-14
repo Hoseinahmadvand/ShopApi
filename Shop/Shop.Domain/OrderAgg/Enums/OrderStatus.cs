@@ -2,8 +2,8 @@
 
 public enum OrderStatus
 {
-    Pennding,
+    Pending,
     Finally,
-    Shiping,
+    Shipping,
     Rejected
 }

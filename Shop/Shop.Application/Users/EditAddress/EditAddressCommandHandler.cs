@@ -28,7 +28,7 @@ namespace Shop.Application.Users.EditAddress
                                           request.Family,
                                           request.NationalCode);
 
-            user.EditAdderss(address, request.Id);
+            user.EditAddress(address, request.Id);
             await _userRepository.Save();
 
             return OperationResult.Success();

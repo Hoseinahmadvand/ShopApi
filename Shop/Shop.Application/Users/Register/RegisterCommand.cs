@@ -5,13 +5,13 @@ namespace Shop.Application.Users.Register
 {
     public class RegisterCommand:IBaseCommand
     {
-        public RegisterCommand(string phoneNumber, string password)
+        public RegisterCommand(PhoneNumber phoneNumber, string password)
         {
             PhoneNumber = phoneNumber;
             Password = password;
         }
 
-        public string  PhoneNumber { get; set; }
+        public PhoneNumber  PhoneNumber { get; set; }
         public string Password { get; set; }
     }
 }

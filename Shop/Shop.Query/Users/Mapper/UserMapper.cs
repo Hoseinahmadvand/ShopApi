@@ -15,7 +15,7 @@ public static class UserMapper
             CreationDate = user.CreationDate,
             Family = user.Family,
             PhoneNumber = user.PhoneNumber,
-            Avatar = user.Avatar,
+            AvatarName = user.Avatar,
             Email = user.Email,
             Gender = user.Gender,
             Name = user.Name,
@@ -52,7 +52,7 @@ public static class UserMapper
             CreationDate = user.CreationDate,
             Family = user.Family,
             PhoneNumber = user.PhoneNumber,
-            Avatar = user.Avatar,
+            AvatarName = user.Avatar,
             Email = user.Email,
             Gender = user.Gender,
             Name = user.Name

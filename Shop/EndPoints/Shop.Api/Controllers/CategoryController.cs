@@ -1,19 +1,19 @@
-﻿using Common.Application;
-using Common.AspNetCore;
+﻿using Common.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Api.Infrastructure.Security;
 using Shop.Application.Categories.AddChild;
 using Shop.Application.Categories.Create;
 using Shop.Application.Categories.Edit;
+using Shop.Domain.RoleAgg.Enums;
 using Shop.Persentation.Facade.Categories;
 using Shop.Query.Categories.DTOs;
 using System.Net;
 
 namespace Shop.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
+
+[PermissionChecker(Permission.Category_Management)]
 public class CategoryController : ApiController
 {
     private readonly ICategoryFacade _categoryFacade;

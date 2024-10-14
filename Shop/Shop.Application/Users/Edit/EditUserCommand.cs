@@ -7,13 +7,13 @@ namespace Shop.Application.Users.Edit
 {
     public class EditUserCommand : IBaseCommand
     {
-        public EditUserCommand(string name,
+        public EditUserCommand(long userId,
+                               string name,
+                               IFormFile? avatar,
                                string family,
                                string phoneNumber,
                                string email,
-                               Gender gender,
-                               long userId,
-                               IFormFile? avatar)
+                               Gender gender)
         {
 
             Name = name;

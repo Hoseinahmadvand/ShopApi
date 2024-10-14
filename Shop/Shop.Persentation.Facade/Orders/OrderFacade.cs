@@ -3,10 +3,14 @@ using MediatR;
 using Shop.Application.Orders.AddItem;
 using Shop.Application.Orders.CheckOut;
 using Shop.Application.Orders.DecreaseItemCount;
+using Shop.Application.Orders.Finally;
+using Shop.Application.Orders.IncreaseItemCount;
 using Shop.Application.Orders.RemoveItem;
+using Shop.Application.Orders.SendOrder;
 using Shop.Query.Orders.DTOs;
 using Shop.Query.Orders.GetByFilter;
 using Shop.Query.Orders.GetById;
+using Shop.Query.Orders.GetCurrent;
 
 namespace Shop.Persentation.Facade.Orders;
 
@@ -21,7 +25,7 @@ internal class OrderFacade : IOrderFacade
 
     #region Commands
 
-  
+
     public async Task<OperationResult> AddOrderItem(AddOrderItemCommand command)
     {
         return await _mediator.Send(command);
@@ -42,9 +46,9 @@ internal class OrderFacade : IOrderFacade
         return await _mediator.Send(command);
     }
 
-   public async Task<OperationResult> IncreaseItemCount(DecreaseOrderItemCountCommand command)
+    public async Task<OperationResult> IncreaseItemCount(IncreaseOrderItemCountCommand command)
     {
-       return await _mediator.Send(command);
+        return await _mediator.Send(command);
     }
 
 
@@ -62,14 +66,19 @@ internal class OrderFacade : IOrderFacade
         return await _mediator.Send(new GetOrdersByFilterQuery(filterParams));
     }
 
-    public Task<OperationResult> SendOrder(long orderId)
+    public async Task<OperationResult> SendOrder(long orderId)
     {
-        throw new NotImplementedException();
+        return await _mediator.Send(new SendOrderCommand(orderId));
     }
 
-    public Task<OrderDto?> GetCurrentOrder(long userId)
+    public async Task<OrderDto?> GetCurrentOrder(long userId)
     {
-        throw new NotImplementedException();
+        return await _mediator.Send(new GetCurrentUserOrderQuery(userId));
+    }
+
+    public async Task<OperationResult> FinallyOrder(OrderFinallyCommand command)
+    {
+        return await _mediator.Send(command);
     }
 
     #endregion

@@ -4,35 +4,31 @@ using Shop.Infrastructure.Persistent.Dapper;
 using Shop.Infrastructure.Persistent.Ef;
 using Shop.Query.Orders.DTOs;
 
-namespace Shop.Query.Orders.Mapper
+namespace Shop.Query.Orders.Mapper;
+
+internal static class OrderMapper
 {
-    public static class OrderMapper
+    public static OrderDto Map(this Order order)
     {
-        public static OrderDto Map(this Order dto)
+        return new OrderDto()
         {
-            if (dto == null)
-                return null;
-            return new OrderDto()
-            {
-                Id = dto.Id,
-                CreationDate = dto.CreationDate,
-                Status = dto.Status,
-                Discount = dto.Discount,
-                Address = dto.Address,
-                Items = new(),
-                LastUpdate = dto.LastUpdate,
-                ShippingMethod = dto.ShippingMethod,
-                UserId = dto.UserId,
-                FullName = "",
+            CreationDate = order.CreationDate,
+            Id = order.Id,
+            Status = order.Status,
+            Address = order.Address,
+            Discount = order.Discount,
+            Items = new(),
+            LastUpdate = order.LastUpdate,
+            ShippingMethod = order.ShippingMethod,
+            FullName = "",
+            UserId = order.UserId,
+        };
+    }
 
-            };
-        }
-
-        public static async Task<List<OrderItemDto>> GetOrderItems(this OrderDto dto, DapperContext dapperContext)
-        {
-          
-            using var connection=dapperContext.CreateConnection();
-            var sql = @$"SELECT o.Id, s.ShopName ,o.OrderId,o.InventoryId,o.Count,o.price,
+    public static async Task<List<OrderItemDto>> GetOrderItems(this OrderDto orderDto, DapperContext dapperContext)
+    {
+        using var connection = dapperContext.CreateConnection();
+        var sql = @$"SELECT o.Id, s.ShopName ,o.OrderId,o.InventoryId,o.Count,o.price,
                           p.Title as ProductTitle , p.Slug as ProductSlug ,
                           p.ImageName as ProductImageName
                     FROM {dapperContext.OrderItems} o
@@ -40,29 +36,30 @@ namespace Shop.Query.Orders.Mapper
                     Inner Join {dapperContext.Products} p on i.ProductId=p.Id
                     Inner Join {dapperContext.Sellers} s on i.SellerId=s.Id
                     where o.OrderId=@orderId";
-            var result=await connection.QueryAsync<OrderItemDto>(sql, new {orderId=dto.Id});
-            return result.ToList();
-        }
-        public static OrderFilterData MapFilterData(this Order dto, ShopContext context)
-        {
-            var fullName = context.Users
-                .Where(u => u.Id == dto.UserId)
-                .Select(u => $"{u.Name} {u.Family}")
-                .First();
-            return new OrderFilterData()
-            {
-                Id = dto.Id,
-                Status = dto.Status,
-                City = dto.Address?.City,
-                Shire = dto.Address?.Shire,
-                ShippingType = dto.ShippingMethod?.ShippingType,
-                CreationDate = dto.CreationDate,
-                TotalItemCount = dto.ItemCount,
-                TotalPrice = dto.TotalPrice,
-                UserId = dto.UserId,
-                UserFullName = fullName
 
-            };
-        }
+        var result = await connection
+            .QueryAsync<OrderItemDto>(sql, new { orderId = orderDto.Id });
+        return result.ToList();
+    }
+    public static OrderFilterData MapFilterData(this Order order, ShopContext context)
+    {
+        var userFullName = context.Users
+            .Where(r => r.Id == order.UserId)
+            .Select(u => $"{u.Name} {u.Family}")
+            .First();
+
+        return new OrderFilterData()
+        {
+            Status = order.Status,
+            Id = order.Id,
+            CreationDate = order.CreationDate,
+            City = order.Address?.City,
+            ShippingType = order.ShippingMethod?.ShippingType,
+            Shire = order.Address?.Shire,
+            TotalItemCount = order.ItemCount,
+            TotalPrice = order.TotalPrice,
+            UserFullName = userFullName,
+            UserId = order.UserId
+        };
     }
 }

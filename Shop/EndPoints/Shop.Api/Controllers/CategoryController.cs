@@ -13,7 +13,7 @@ using System.Net;
 namespace Shop.Api.Controllers;
 
 
-[PermissionChecker(Permission.Category_Management)]
+//[PermissionChecker(Permission.Category_Management)]
 public class CategoryController : ApiController
 {
     private readonly ICategoryFacade _categoryFacade;

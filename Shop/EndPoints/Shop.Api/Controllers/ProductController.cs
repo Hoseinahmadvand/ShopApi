@@ -13,7 +13,7 @@ using Shop.Query.Products.DTOs;
 
 namespace Shop.Api.Controllers;
 
-[PermissionChecker(Permission.CRUD_Product)]
+//[PermissionChecker(Permission.CRUD_Product)]
 public class ProductController : ApiController
 {
     private readonly IProductFacade _productFacade;
